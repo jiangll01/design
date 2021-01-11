@@ -7,4 +7,5 @@ package com.dream.design.chain.chain2;
  */
 public class Model {
 
+
 }

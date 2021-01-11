@@ -7,8 +7,11 @@ package com.dream.oop.intefaceandabstract.person;
  */
 public interface person {
     void eat();
+
     void sleep();
+
     void think();
+
     void run();
 
 }

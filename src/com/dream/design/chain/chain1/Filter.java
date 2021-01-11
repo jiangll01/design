@@ -8,6 +8,7 @@ package com.dream.design.chain.chain1;
 public interface Filter {
     void doFilter(String data);
 }
+
 class FilterEgg implements Filter {
 
     @Override
@@ -15,6 +16,7 @@ class FilterEgg implements Filter {
         //doSomething 过滤鸡蛋
     }
 }
+
 class FilterAoBing implements Filter {
 
     @Override

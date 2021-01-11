@@ -10,7 +10,7 @@ import com.dream.design.proxy.staticProxy.Programmer;
  */
 public class commonProxy implements Programmer {
     // 指定程序员大V要给Java3y点赞
-    private Java3y java3y ;
+    private Java3y java3y;
 
     // 只做Java3y的生意了
     public commonProxy() {

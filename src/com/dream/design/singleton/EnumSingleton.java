@@ -8,9 +8,10 @@ package com.dream.design.singleton;
  * 而且还能防止反序列化重新创建新的对象，
  * 可谓是很坚强的壁垒啊
  */
-public enum  EnumSingleton {
+public enum EnumSingleton {
     //实例
     INSTANCE;
+
     public void whateverMethod() {
     }
 

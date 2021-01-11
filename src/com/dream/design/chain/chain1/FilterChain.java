@@ -11,12 +11,13 @@ import java.util.List;
 public class FilterChain {
     private List<Filter> filters = new ArrayList<>();
 
-    public FilterChain(){
+    public FilterChain() {
         filters.add(new FilterEgg());
         filters.add(new FilterAoBing());
         filters.add(new FilterBaiCai());
         filters.add(new FilterJiTou());
     }
+
     //对外暴露接口
     public void processData(String data) {
         for (Filter filter : filters) {

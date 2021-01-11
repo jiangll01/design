@@ -54,7 +54,7 @@ public class StreamApiTest {
      * 1-筛选与切片
      */
     @Test
-    public void test1(){
+    public void test1() {
         /*
         filter(Predicate p) 接收 Lambda ， 从流中排除某些元素
         distinct() 筛选，通过流所生成元素的 hashCode() 和 equals() 去除重复元素
@@ -64,10 +64,10 @@ public class StreamApiTest {
         // 1、filter(Predicate p) 接收 Lambda ， 从流中排除某些元素
         List<Employee> list = EmployeeData.getEmployees();
         list.stream().filter(employee -> {
-            return employee.getAge() >20;
-        }).forEach(e-> System.out.println(e));
+            return employee.getAge() > 20;
+        }).forEach(e -> System.out.println(e));
         System.out.println("***************************************");
-        list.stream().filter(e-> e.getAge()<20).forEach(System.out::println);
+        list.stream().filter(e -> e.getAge() < 20).forEach(System.out::println);
         System.out.println("***************************************");
         // 2、distinct() 筛选，通过流所生成元素（一定要重写类的）的 hashCode() 和 equals() 去除重复元素,
         list.stream().distinct().forEach(System.out::println);
@@ -78,11 +78,12 @@ public class StreamApiTest {
         //4、skip(long n) 跳过元素，就是跳过前面的，返回一个扔掉了前 个空流。与 limit(n) 互补 n 个
         list.stream().skip(2).forEach(System.out::println);
     }
+
     /**
      * 2-映 射
      */
     @Test
-    public void test2(){
+    public void test2() {
        /*
         map(Function f) 接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。
         如mapToInt就是把原始Stream转换成一个新的Stream，这个新生成的Stream中的元素都是int类型。
@@ -93,17 +94,17 @@ public class StreamApiTest {
         flatMap(Function f) 接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流
         */
 
-       //1、map(Function f) 接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。
-       Arrays.asList(1,2,3).stream().map((arr)->{
-           return arr*2;
-       }).forEach(System.out::println);
+        //1、map(Function f) 接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。
+        Arrays.asList(1, 2, 3).stream().map((arr) -> {
+            return arr * 2;
+        }).forEach(System.out::println);
         System.out.println("**************************************");
-        Arrays.asList(1,2,3).stream().map(a->a*3).forEach(System.out::println);
+        Arrays.asList(1, 2, 3).stream().map(a -> a * 3).forEach(System.out::println);
         System.out.println("**************************************");
         EmployeeData.getEmployees().stream().map(employee -> employee.getName()).forEach(System.out::println);
         System.out.println("**************************************");
         // 2、flatMap(Function f) 接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流
-       //主要应用集合嵌套集合
+        //主要应用集合嵌套集合
 
         List<String> list1 = Arrays.asList("Virat", "Dhoni", "Jadeja");
         List<String> list2 = Arrays.asList("Warner", "Watson", "Smith");
@@ -113,7 +114,7 @@ public class StreamApiTest {
         Stream<String> stringStream = lists.stream().flatMap(Collection::stream);
         //主要应用集合嵌套集合,将期打散后汇集成一个流
         lists.stream().flatMap(Collection::stream).forEach(s -> {
-            System.out.println(s+"  "+"aa");
+            System.out.println(s + "  " + "aa");
         });
 
     }
@@ -122,19 +123,19 @@ public class StreamApiTest {
      * 3-排序
      */
     @Test
-    public void test3(){
+    public void test3() {
         /**
          * sorted() 产生一个新流，其中按自然顺序排序
          * sorted(Comparator com) 产生一个新流，其中按比较器顺序排序
          */
         //1、sorted() 产生一个新流，其中按自然顺序排序,从小到大
-        Arrays.asList(1,3,6,0,2,3,78,-1,4).stream().sorted().forEach(System.out::println);
+        Arrays.asList(1, 3, 6, 0, 2, 3, 78, -1, 4).stream().sorted().forEach(System.out::println);
         System.out.println("**************************************");
-        Arrays.asList(1,3,6,0,2,3,78,-1,4).stream().sorted(Integer::compareTo).forEach(System.out::println);
+        Arrays.asList(1, 3, 6, 0, 2, 3, 78, -1, 4).stream().sorted(Integer::compareTo).forEach(System.out::println);
         System.out.println("**************************************");
         //实现从大到小,通过添加负号
-        Arrays.asList(1,3,6,0,2,3,78,-1,4).stream().sorted((x,y)->{
-            return -Integer.compare(x,y);
+        Arrays.asList(1, 3, 6, 0, 2, 3, 78, -1, 4).stream().sorted((x, y) -> {
+            return -Integer.compare(x, y);
         }).forEach(System.out::println);
         System.out.println("**************************************");
         //通过年龄进行按照小到大排序，自然排序的话，会报错，对象未实现comparable接口
@@ -144,22 +145,22 @@ public class StreamApiTest {
         System.out.println("**************************************");
         //通过年龄进行按照小到大排序，自定义comparable接口实现
         EmployeeData.getEmployees().stream()
-                .sorted((e1,e2)->Integer.compare(e1.getAge(),e2.getAge()))
+                .sorted((e1, e2) -> Integer.compare(e1.getAge(), e2.getAge()))
                 .forEach(System.out::println);
         System.out.println("**************************************");
         // /通过年龄进行按照大到小排序
-        EmployeeData.getEmployees().stream().sorted((e,e1)->{
-            if (e.getAge()>e1.getAge()){
+        EmployeeData.getEmployees().stream().sorted((e, e1) -> {
+            if (e.getAge() > e1.getAge()) {
                 return -1;
-            }else {
+            } else {
                 return 1;
             }
         }).forEach(System.out::println);
 
         System.out.println("**************************************");
         // /通过年龄进行按照大到小排序
-        EmployeeData.getEmployees().stream().sorted((e,e1)->{
-            return -Integer.compare(e.getAge(),e1.getAge());
+        EmployeeData.getEmployees().stream().sorted((e, e1) -> {
+            return -Integer.compare(e.getAge(), e1.getAge());
         }).forEach(System.out::println);
     }
 
@@ -181,7 +182,7 @@ public class StreamApiTest {
      * 1-匹配与查找
      */
     @Test
-    public void test4(){
+    public void test4() {
        /*
         allMatch(Predicate p) 检查是否匹配所有元素
         anyMatch(Predicate p) 检查是否至少匹配一个元素
@@ -196,7 +197,7 @@ public class StreamApiTest {
         称为外部迭代。相反， Stream API 使用内部迭
         代——它帮你把迭代做了)
         */
-       //是不是年龄都大于18
+        //是不是年龄都大于18
         System.out.println(EmployeeData.getEmployees().stream().anyMatch(e -> e.getAge() > 18));
         //只要存在一个就行
         System.out.println(EmployeeData.getEmployees().stream().allMatch(e -> e.getAge() > 18));
@@ -209,22 +210,23 @@ public class StreamApiTest {
         //数据long
         System.out.println(EmployeeData.getEmployees().stream().count());
         System.out.println("**********************************");
-        System.out.println(EmployeeData.getEmployees().stream().max((x,y)->{
-            return Integer.compare(x.getAge(),y.getAge());
+        System.out.println(EmployeeData.getEmployees().stream().max((x, y) -> {
+            return Integer.compare(x.getAge(), y.getAge());
         }));
-        System.out.println(EmployeeData.getEmployees().stream().min((x,y)->{
-            return Integer.compare(x.getAge(),y.getAge());
+        System.out.println(EmployeeData.getEmployees().stream().min((x, y) -> {
+            return Integer.compare(x.getAge(), y.getAge());
         }));
         System.out.println("**********************************");
         EmployeeData.getEmployees().stream().forEach(employee -> {
             System.out.println(employee.getName());
         });
     }
+
     /**
      * 2-归约
      */
     @Test
-    public void test5(){
+    public void test5() {
         /**
          * reduce(T iden, BinaryOperator b) 可以将流中元素反复结合起来，得到一
          * 个值。返回 T
@@ -236,15 +238,16 @@ public class StreamApiTest {
         Integer reduce = list.stream().reduce(0, Integer::sum);
         System.out.println(reduce);
         //计算全部的工资
-        List<Employee> list1 = EmployeeData.getEmployees() ;
-        Optional<Double> reduce2 = list1.stream().map(e->e.getSalary()).reduce(Double::sum);
+        List<Employee> list1 = EmployeeData.getEmployees();
+        Optional<Double> reduce2 = list1.stream().map(e -> e.getSalary()).reduce(Double::sum);
         System.out.println(reduce2.get());
     }
+
     /**
      * 3-收集
      */
     @Test
-    public void test6(){
+    public void test6() {
         /**
          * collect(Collector c) 将流转换为其他形式。接收一个 Collector接口的实现，用于给Stream中元素做汇总的方法
          */

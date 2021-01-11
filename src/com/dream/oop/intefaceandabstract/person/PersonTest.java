@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 public class PersonTest {
     @Test
-    public void test(){
+    public void test() {
         person person = new Student();
         person.think();
         Teacher teacher = new Teacher();

@@ -6,7 +6,7 @@ package com.dream.design.proxy.cglibProxy;
  * @Description:
  */
 public class UserDao {
-    public void  save(){
+    public void save() {
         System.out.println("我进行存库操作");
     }
 }
